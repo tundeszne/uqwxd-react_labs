@@ -61,41 +61,41 @@ const App = () => {
         setTodoEditing(null);
     }
   
-return(
-    <div id="todo-list">
-        <h1>Todo List</h1>
-        <form onSubmit={handleSubmit}>
-            <input
-                type="text"
-                onChange={(e) => setTodo(e.target.value)}
-                placeholder="Add a new task"
-                value={todo}
-            />
-            <button type="submit">Add Todo</button>
-        </form>
-        {todos.map((todo) => 
-            <div className="todo" key={todo.id}>
-                <div className="todo-text">
-                    <input type="checkbox" id="completed" checked={todo.completed} onChange={() => toggleComplete(todo.id)} />
+    return(
+        <div id="todo-list">
+            <h1>Todo List</h1>
+            <form onSubmit={handleSubmit}>
+                <input
+                    type="text"
+                    onChange={(e) => setTodo(e.target.value)}
+                    placeholder="Add a new task"
+                    value={todo}
+                />
+                <button type="submit">Add Todo</button>
+            </form>
+            {todos.map((todo) => 
+                <div className="todo" key={todo.id}>
+                    <div className="todo-text">
+                        <input type="checkbox" id="completed" checked={todo.completed} onChange={() => toggleComplete(todo.id)} />
 
-                    {todo.id === todoEditing ? (
-                        <input type="text" onChange={(e) => setEditingText(e.target.value)} />
-                     ) : (
-                       <div>{todo.text}</div>
-                    )}
+                        {todo.id === todoEditing ? (
+                            <input type="text" onChange={(e) => setEditingText(e.target.value)} />
+                        ) : (
+                        <div>{todo.text}</div>
+                        )}
+                    </div>
+                    <div className="todo-actions">
+                        {todo.id === todoEditing ? (
+                            <button onClick={() => submitEdits(todo.id)}>Submit Edits</button>
+                        ) : (
+                            <button onClick={() => setTodoEditing(todo.id)}>Edit</button>
+                        )}
+                        <button onClick={() => deleteToDo(todo.id)}>Delete</button>
+                    </div>
                 </div>
-                <div className="todo-actions">
-                    {todo.id === todoEditing ? (
-                        <button onClick={() => submitEdits(todo.id)}>Submit Edits</button>
-                    ) : (
-                        <button onClick={() => setTodoEditing(todo.id)}>Edit</button>
-                    )}
-                    <button onClick={() => deleteToDo(todo.id)}>Delete</button>
-                </div>
-            </div>
-        )}
-    </div>
-);
+            )}
+        </div>
+    );
 };
 
 export default App;
